@@ -42,7 +42,7 @@ const projects = [
         title: "LED matris",
         description: "Enkel led matris",
         image: LedMatrix,
-        link: "https://joakimwennergren.se/projects/led-matrix",
+        link: "https://joakimwennergren.se/projects/led-matris",
     },
 ]
 
