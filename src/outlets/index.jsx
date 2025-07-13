@@ -92,7 +92,7 @@ export default function Index() {
                     <Typography variant='h5' sx={{ fontWeight: "bold", marginBottom: 2, color: "#444" }}>Projekt</Typography>
                     {currentItems.map((item, index) => (
                         <Box sx={{ padding: 2, marginBottom: 2, border: "solid 1px #ddd", borderRadius: 1 }} key={"project+" + index}>
-                            <a href={item.link} style={{ color: "#c951a7", textDecorationStyle: "dashed" }}><Typography component={'p'} sx={{ fontWeight: "bold" }}>{item.title}</Typography></a>
+                            <a href={item.link} style={{ color: "#c951a7", textDecorationStyle: "dashed" }}><Typography component={'p'} sx={{ fontWeight: "bold", marginBottom: 0.5 }}>{item.title}</Typography></a>
                             <img src={item.image} style={{ width: "100%", marginBottom: 10, marginLeft: item.offset }}></img>
                             <Typography component={'p'} sx={{ fontSize: 15 }}>{item.description}</Typography>
                         </Box>

@@ -3,6 +3,7 @@ import { Typography, Grid, Box } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Snusdosa from './projects/snusdosa';
 import Entropy from './projects/entropy';
+import LedMatrix from './projects/ledmatrix';
 
 
 export default function Projects() {
@@ -16,6 +17,8 @@ export default function Projects() {
                 return <Snusdosa />;
             case "entropy-gameengine":
                 return <Entropy />;
+            case "led-matrix":
+                return <LedMatrix />;
             default:
                 return <Typography variant="h4">Projektet finns inte.</Typography>;
         }

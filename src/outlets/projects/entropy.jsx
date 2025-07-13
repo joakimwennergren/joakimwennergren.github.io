@@ -3,7 +3,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import Svampjakt from '../../static/projects/svampjakt.jpg';
 
 
-export default function SnusDosa() {
+export default function Entropy() {
 
     const isMobile = useMediaQuery('(max-width: 600px)');
 

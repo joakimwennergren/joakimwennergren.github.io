@@ -1,8 +1,9 @@
 import Snusdosa from "../static/projects/snusdosa.jpg";
 import EntropyOld from "../static/projects/entropy_old.png";
-import SmartDisplay from "../static/projects/smartdisplay.jpg";
-import Phone from "../static/projects/phone.jpg";
+import SmartDisplay from "../static/projects/smart_display_painting.jpeg";
+import Phone from "../static/projects/phonepcb.jpeg";
 import LedMatrix from "../static/projects/ledmatrix.jpg";
+import UvBox from "../static/projects/uvbox.jpeg";
 
 const projects = [
     {
@@ -15,6 +16,13 @@ const projects = [
         title: "Entropy spelmotor",
         description: "Spelmotorn är ett långsiktigt utvecklingsprojekt som kombinerar hög prestanda, plattformsoberoende och ett modernt komponentbaserat arkitekturtänk.",
         image: EntropyOld,
+        offset: -10,
+        link: "https://joakimwennergren.se/projects/entropy-gameengine",
+    },
+    {
+        title: "Uv exponeringsenhet",
+        description: "En låda med UV-lysrör som används för att exponera kretskort.",
+        image: UvBox,
         offset: -10,
         link: "https://joakimwennergren.se/projects/entropy-gameengine",
     },
