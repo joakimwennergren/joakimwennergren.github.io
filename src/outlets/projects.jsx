@@ -17,7 +17,7 @@ export default function Projects() {
                 return <Snusdosa />;
             case "entropy-gameengine":
                 return <Entropy />;
-            case "led-matrix":
+            case "led-matris":
                 return <LedMatrix />;
             default:
                 return <Typography variant="h4">Projektet finns inte.</Typography>;
