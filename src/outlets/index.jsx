@@ -72,7 +72,7 @@ export default function Index() {
                                 <Box sx={{ flexDirection: "row", display: "flex", justifyContent: "end" }}>
                                     <a href="https://www.linkedin.com/in/joakim-wennergren/" style={{ color: "#c951a7", textDecoration: "none" }}><Box sx={{ borderRadius: "50%", border: "solid 1px #c951a7", padding: 1, width: 42, height: 42, display: "flex", justifyContent: "center", alignItems: "center", marginRight: 2 }}><LinkedIn size={24} /></Box></a>
                                     <a href="https://github.com/joakimwennergren" style={{ color: "#c951a7", textDecoration: "none" }}><Box sx={{ borderRadius: "50%", border: "solid 1px #c951a7", padding: 1, width: 42, height: 42, display: "flex", justifyContent: "center", alignItems: "center", marginRight: 2 }}><GitHub size={24} /></Box></a>
-                                    <a href="mailto:hej@joakimwennergren.se" style={{ color: "#c951a7", textDecoration: "none" }}><Box sx={{ borderRadius: "50%", border: "solid 1px #c951a7", padding: 1, width: 42, height: 42, display: "flex", justifyContent: "center", alignItems: "center", }}><Email size={24} /></Box></a>
+                                    <a href="mailto:mail@joakimwennergren.se" style={{ color: "#c951a7", textDecoration: "none" }}><Box sx={{ borderRadius: "50%", border: "solid 1px #c951a7", padding: 1, width: 42, height: 42, display: "flex", justifyContent: "center", alignItems: "center", }}><Email size={24} /></Box></a>
                                 </Box>
                             </Box>
                         </Box>
