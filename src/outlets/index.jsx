@@ -92,7 +92,7 @@ export default function Index() {
                     <Typography variant='h5' sx={{ fontWeight: "bold", marginBottom: 2, color: "#444" }}>Projekt</Typography>
                     {currentItems.map((item, index) => (
                         <Box sx={{ padding: 2, marginBottom: 2, border: "solid 1px #ddd", borderRadius: 1 }} key={"project+" + index}>
-                            <a href={item.link} style={{ color: "#c951a7", textDecorationStyle: "dashed" }}><Typography component={'p'} sx={{ fontWeight: "bold", marginBottom: 0.5 }}>{item.title}</Typography></a>
+                            <a href={"#/" + item.link} style={{ color: "#c951a7", textDecorationStyle: "dashed" }}><Typography component={'p'} sx={{ fontWeight: "bold", marginBottom: 0.5 }}>{item.title}</Typography></a>
                             <img src={item.image} style={{ width: "100%", marginBottom: 10, marginLeft: item.offset }}></img>
                             <Typography component={'p'} sx={{ fontSize: 15 }}>{item.description}</Typography>
                         </Box>
@@ -108,7 +108,7 @@ export default function Index() {
                     <Typography variant='h5' sx={{ fontWeight: "bold", marginBottom: 2, color: "#444" }}>Musik</Typography>
                     {currentMusicItems.map((item, index) => (
                         <Box sx={{ marginBottom: 2, borderBottom: "solid 1px #ddd", paddingBottom: 2 }} key={"tune+" + index}>
-                            <a href={"/tunes/" + item.title} style={{ color: "#c951a7", textDecorationStyle: "dashed" }}><Typography component={'p'} sx={{ fontWeight: "bold", marginBottom: 1 }}>{item.title}</Typography></a>
+                            <a href={"#/tunes/" + item.title} style={{ color: "#c951a7", textDecorationStyle: "dashed" }}><Typography component={'p'} sx={{ fontWeight: "bold", marginBottom: 1 }}>{item.title}</Typography></a>
                             <AudioPlayer showJumpControls={false} src={"https://joakimwennergren.se/" + item.title.replace(/\s+/g, '').toLowerCase() + ".wav"} />
                         </Box >
                     ))
