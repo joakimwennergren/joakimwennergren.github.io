@@ -1,5 +1,5 @@
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -17,7 +17,7 @@ const theme = createTheme({
   },
 });
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     // no path on this parent route, just the component
     Component: Layout,
