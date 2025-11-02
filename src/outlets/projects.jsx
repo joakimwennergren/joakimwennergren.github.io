@@ -4,6 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Snusdosa from './projects/snusdosa';
 import Entropy from './projects/entropy';
 import LedMatrix from './projects/ledmatrix';
+import Nametag from './projects/nametag';
 
 
 export default function Projects() {
@@ -19,6 +20,8 @@ export default function Projects() {
                 return <Entropy />;
             case "led-matris":
                 return <LedMatrix />;
+            case "namnskylt":
+                return <Nametag />;
             default:
                 return <Typography variant="h4">Projektet finns inte.</Typography>;
         }

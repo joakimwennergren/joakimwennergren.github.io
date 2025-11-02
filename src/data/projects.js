@@ -4,8 +4,15 @@ import SmartDisplay from "../static/projects/smart_display_painting.jpeg";
 import Phone from "../static/projects/phonepcb.jpeg";
 import LedMatrix from "../static/projects/ledmatrix.jpg";
 import UvBox from "../static/projects/uvbox.jpeg";
+import Namnskylt from "../static/projects/namnskylt.png";
 
 const projects = [
+    {
+        title: "Namnskylt",
+        description: "En namnskylt med e-paper display och wifi/bluetooth som visar användarens namn, närmsta chef och sektion.",
+        image: Namnskylt,
+        link: "projects/namnskylt",
+    },
     {
         title: "Smart snusdosa",
         description: "En smart snusdosa som låser sig i intervall där användaren får ta en snus 1 gång varje timme. Blåtanduppkopplad till en mobilapp.",
