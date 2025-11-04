@@ -1,6 +1,6 @@
 This favicon was generated using the following font:
 
-- Font Title: Harmattan
+- Font Title: Iansui
 - Font Author: undefined
-- Font Source: https://fonts.gstatic.com/s/harmattan/v21/goksH6L2DkFvVvRp9XpTS0CjkP1Yog.ttf
+- Font Source: https://fonts.gstatic.com/s/iansui/v7/w8gbH2UoTuUp5bOajSGD1FcXoQ.ttf
 - Font License: undefined)

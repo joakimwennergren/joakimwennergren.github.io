@@ -1,56 +1,36 @@
 import { useParams } from "react-router";
-import { Typography, Grid, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Snusdosa from './projects/snusdosa';
 import Entropy from './projects/entropy';
 import LedMatrix from './projects/ledmatrix';
 import Nametag from './projects/nametag';
+import UVbox from "./projects/uvbox";
+import projects from "../data/projects";
 
 
 export default function Projects() {
 
+    const projectComponents = {
+        "smart-snusdosa": Snusdosa,
+        "entropy-gameengine": Entropy,
+        //"led-matris": LedMatrix,
+        "namnskylt": Nametag,
+        //"uv-exponeringsenhet": UVbox,
+    };
+
     let { projectId } = useParams();
-    const isMobile = useMediaQuery('(max-width: 800px)');
-
-    const RenderProject = () => {
-        switch (projectId) {
-            case "smart-snusdosa":
-                return <Snusdosa />;
-            case "entropy-gameengine":
-                return <Entropy />;
-            case "led-matris":
-                return <LedMatrix />;
-            case "namnskylt":
-                return <Nametag />;
-            default:
-                return <Typography variant="h4">Projektet finns inte.</Typography>;
-        }
-    }
-
-    if (isMobile) {
-        return (
-            <Box sx={{ padding: 2 }}>
-                <a href="https://joakimwennergren.se" style={{ color: "#c951a7", textDecorationStyle: "dashed" }}><Typography component={'p'} sx={{ fontWeight: "bold", marginBottom: 2, }}>Gå tillbaka till startsidan</Typography></a>
-                {RenderProject()}
-            </Box>
-        );
-    }
+    const ProjectComponent = projectComponents[projectId];
 
     return (
         <>
-            <Grid container>
-                <Grid size={1} sx={{ textAlign: 'center', borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc', display: 'flex', alignItems: 'center', }}>
-                </Grid>
-                <Grid size={10} sx={{
-                    padding: 6, borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc'
-                }}>
-                    <a href="https://joakimwennergren.se" style={{ color: "#c951a7", textDecorationStyle: "dashed" }}><Typography component={'p'} sx={{ fontWeight: "bold", marginBottom: 2, }}>Gå tillbaka till startsidan</Typography></a>
-                    {RenderProject()}
-                </Grid>
-                <Grid size={1} sx={{ textAlign: 'center', padding: 2, borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc', }}>
-                </Grid>
-            </Grid>
-
+            <div class="container mx-auto px-6 lg:px-0">
+                {ProjectComponent ? (
+                    <ProjectComponent />
+                ) : (
+                    <h1 class="p-10 text-center">Projektet finns inte</h1>
+                )}
+            </div>
         </>
     );
 }
