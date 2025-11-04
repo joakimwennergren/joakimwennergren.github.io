@@ -1,12 +1,8 @@
-import { Typography, Box, Paper, Grid } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery'
 import LedMatrixBack from '../../static/projects/led_matrix_back.jpeg';
 import LedMatrix2Done from '../../static/projects/led_matrix_2_done.jpeg';
 import LedMatrix2Pcb from '../../static/projects/led_matrix_2_pcb.jpeg';
 
 export default function LedMatrix() {
-
-    const isMobile = useMediaQuery('(max-width: 600px)');
 
     const Description = () => {
         return (

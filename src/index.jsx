@@ -2,7 +2,6 @@ import {
   createHashRouter,
   RouterProvider,
 } from "react-router";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ReactDOM from 'react-dom/client';
 import Layout from './Layout';
 import Index from './outlets/index';
@@ -10,12 +9,6 @@ import Projects from './outlets/projects';
 import Tunes from './outlets/tunes';
 
 import './App.css';
-
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
-  },
-});
 
 const router = createHashRouter([
   {
@@ -32,10 +25,7 @@ const router = createHashRouter([
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
-  <ThemeProvider theme={theme}>
-    <RouterProvider router={router} />
-  </ThemeProvider>
-
+  <RouterProvider router={router} />
 );
 
 const reportWebVitals = (onPerfEntry) => {

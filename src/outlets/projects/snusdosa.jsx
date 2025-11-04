@@ -1,5 +1,3 @@
-import { Typography, Box, Paper, Grid } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery'
 import Snusdosan1 from '../../static/projects/snusdosan1.jpeg';
 import Snusdosan2 from '../../static/projects/snusdosan2.jpeg';
 import Snusdosan3 from '../../static/projects/snusdosan3.jpeg';
@@ -7,51 +5,40 @@ import Snusdosan3 from '../../static/projects/snusdosan3.jpeg';
 
 export default function SnusDosa() {
 
-    const isMobile = useMediaQuery('(max-width: 600px)');
-
     const Description = () => {
         return (
             <>
-                <div class="bg-white">
-                    <div class="pt-6">
+                <div className="bg-white">
+                    <div className="pt-6">
                         <nav aria-label="Breadcrumb">
-                            <ol role="list" class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                            <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                                 <li>
-                                    <div class="flex items-center">
-                                        <a href="#" class="mr-2 text-sm font-medium text-gray-900">Hem</a>
-                                        <svg viewBox="0 0 16 20" width="16" height="20" fill="currentColor" aria-hidden="true" class="h-5 w-4 text-gray-300">
+                                    <div className="flex items-center">
+                                        <a href="#" className="mr-2 text-sm font-medium text-gray-900">Hem</a>
+                                        <svg viewBox="0 0 16 20" width="16" height="20" fill="currentColor" aria-hidden="true" className="h-5 w-4 text-gray-300">
                                             <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                                         </svg>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="flex items-center">
-                                        <a href="#" class="mr-2 text-sm font-medium text-gray-900">Projekt</a>
-                                        <svg viewBox="0 0 16 20" width="16" height="20" fill="currentColor" aria-hidden="true" class="h-5 w-4 text-gray-300">
-                                            <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                                        </svg>
-                                    </div>
-                                </li>
-
-                                <li class="text-sm">
-                                    <a href="#" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">Smart snusdosa</a>
+                                <li className="text-sm">
+                                    <a href="#" aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">Smart snusdosa</a>
                                 </li>
                             </ol>
                         </nav>
 
-                        <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:px-8">
-                            <img src={Snusdosan1} alt="Two each of gray, white, and black shirts laying flat." class="row-span-2 aspect-3/4 size-full rounded-lg object-cover max-lg:hidden" />
-                            <img src={Snusdosan2} alt="Model wearing plain black basic tee." class="col-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden" />
-                            <img src={Snusdosan2} alt="Model wearing plain gray basic tee." class="col-start-2 row-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden" />
-                            <img src={Snusdosan3} alt="Model wearing plain white basic tee." class="row-span-2 aspect-4/5 size-full object-cover sm:rounded-lg lg:aspect-3/4" />
+                        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:px-8">
+                            <img src={Snusdosan1} alt="Two each of gray, white, and black shirts laying flat." className="row-span-2 aspect-3/4 size-full rounded-lg object-cover max-lg:hidden" />
+                            <img src={Snusdosan2} alt="Model wearing plain black basic tee." className="col-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden" />
+                            <img src={Snusdosan2} alt="Model wearing plain gray basic tee." className="col-start-2 row-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden" />
+                            <img src={Snusdosan3} alt="Model wearing plain white basic tee." className="row-span-2 aspect-4/5 size-full object-cover sm:rounded-lg lg:aspect-3/4" />
                         </div>
 
-                        <div class="mx-auto max-w-2xl pt-5 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
-                            <div class="lg:col-span-2 lg:border-r lg:border-gray-200 ">
-                                <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Smart Snusdosa</h1>
+                        <div className="mx-auto max-w-2xl pt-5 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
+                            <div className="lg:col-span-2 lg:border-r lg:border-gray-200 ">
+                                <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Smart Snusdosa</h1>
                             </div>
 
-                            <div class="py-2 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pr-8 lg:pb-16">
+                            <div className="py-2 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pr-8 lg:pb-16">
                                 <div className="prose">
                                     <p className="mb-4">
                                         Den smarta snusdosan är en teknikdriven produkt framtagen för att hjälpa användare att kontrollera sitt snusintag över tid.

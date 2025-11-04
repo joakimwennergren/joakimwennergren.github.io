@@ -1,6 +1,4 @@
 import { useParams } from "react-router";
-import { Typography, Box } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Snusdosa from './projects/snusdosa';
 import Entropy from './projects/entropy';
 import LedMatrix from './projects/ledmatrix';
@@ -24,11 +22,11 @@ export default function Projects() {
 
     return (
         <>
-            <div class="container mx-auto px-6 lg:px-0">
+            <div className="container mx-auto px-6 lg:px-0">
                 {ProjectComponent ? (
                     <ProjectComponent />
                 ) : (
-                    <h1 class="p-10 text-center">Projektet finns inte</h1>
+                    <h1 className="p-10 text-center">Projektet finns inte</h1>
                 )}
             </div>
         </>

@@ -1,35 +1,33 @@
 {
+  "type": "module",
   "name": "joakimwennergren.se",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://joakimwennergren.se",
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.2.0",
-    "@mui/material": "^7.2.0",
     "@tailwindcss/vite": "^4.1.16",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.7",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-h5-audio-player": "^3.10.0",
-    "react-router": "^7.6.3",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "feather-icons-react": "^0.9.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-h5-audio-player": "^3.10.1",
+    "react-responsive-pagination": "^2.11.3",
+    "react-router": "^7.9.5",
     "tailwindcss": "^4.1.16",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.5",
-    "web-vitals": "^5.0.3"
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "web-vitals": "^5.1.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
@@ -50,8 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.6.0",
-    "gh-pages": "^6.3.0",
+    "@vitejs/plugin-react": "^5.1.0",
     "npm-check": "^6.0.1"
   }
 }

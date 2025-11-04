@@ -1,6 +1,4 @@
 import { useParams } from "react-router";
-import { Grid, Typography, Box } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery'
 import tunes from '../data/tunes';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
@@ -8,7 +6,6 @@ import 'react-h5-audio-player/lib/styles.css';
 export default function Tunes() {
 
     let { tuneId } = useParams();
-    const isMobile = useMediaQuery('(max-width: 800px)');
 
     const RenderPlayer = () => {
         const cleanTuneId = tuneId.replace(/\s+/g, '');
