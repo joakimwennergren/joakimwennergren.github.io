@@ -1,34 +1,35 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Snusdosa from './projects/snusdosa';
-import Entropy from './projects/entropy';
-import LedMatrix from './projects/ledmatrix';
-import Nametag from './projects/nametag';
-import UVbox from "./projects/uvbox";
-import projects from "../data/projects";
-
+import API_BASE from "../data/api.js";
+import Project from "../components/project.jsx";
 
 export default function Projects() {
 
-    const projectComponents = {
-        "smart-snusdosa": Snusdosa,
-        "entropy-gameengine": Entropy,
-        //"led-matris": LedMatrix,
-        "namnskylt": Nametag,
-        //"uv-exponeringsenhet": UVbox,
-    };
+    let { projectSlug } = useParams();
+    const [project, setProject] = useState(null);
 
-    let { projectId } = useParams();
-    const ProjectComponent = projectComponents[projectId];
+    async function fetchProject() {
+        try {
+            const res = await fetch(`${API_BASE}/projects/${projectSlug}`);
+            return await res.json();
+        } catch (err) {
+            console.error('Error fetching project:', err);
+        }
+    }
+
+    useEffect(() => {
+        console.log("Fetching project with slug:", projectSlug);
+        const loadData = async () => {
+            const fetchedProject = await fetchProject();
+            setProject(fetchedProject);
+        };
+
+        loadData();
+    }, [projectSlug]);
 
     return (
         <>
-            <div className="container mx-auto px-6 lg:px-0">
-                {ProjectComponent ? (
-                    <ProjectComponent />
-                ) : (
-                    <h1 className="p-10 text-center">Projektet finns inte</h1>
-                )}
-            </div>
+            <Project project={project ?? {}} />
         </>
     );
 }

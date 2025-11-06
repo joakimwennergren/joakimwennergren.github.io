@@ -16,7 +16,7 @@ const router = createHashRouter([
     Component: Layout,
     children: [
       { index: true, Component: Index },
-      { path: "projects/:projectId", Component: Projects },
+      { path: "projects/:projectSlug", Component: Projects },
       { path: "tunes/:tuneId", Component: Tunes },
     ],
   },

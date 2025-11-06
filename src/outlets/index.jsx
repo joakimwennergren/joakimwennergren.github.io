@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import tunes from '../data/tunes';
-import projects from '../data/projects';
+import { useState, useEffect } from 'react';
+import API_BASE from '../data/api';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import ResponsivePagination from 'react-responsive-pagination';
@@ -8,7 +7,40 @@ import 'react-responsive-pagination/themes/minimal-light-dark.css';
 
 export default function Index() {
 
+    // Get all projects
+    async function fetchProjects() {
+        try {
+            const res = await fetch(`${API_BASE}/projects`);
+            return await res.json();
+        } catch (err) {
+            console.error('Error fetching projects:', err);
+        }
+    }
+
+    // Get all music
+    async function fetchMusic() {
+        try {
+            const res = await fetch(`${API_BASE}/music`);
+            return await res.json();
+        } catch (err) {
+            console.error('Error fetching music:', err);
+        }
+    }
+
+    useEffect(() => {
+        const loadData = async () => {
+            const fetchedProjects = await fetchProjects();
+            setProjects(fetchedProjects);
+
+            const fetchedTunes = await fetchMusic();
+            setTunes(fetchedTunes);
+        };
+
+        loadData();
+    }, []);
+
     // State for paginating projects
+    const [projects, setProjects] = useState([]);
     const [currentProjectPage, setCurrentProjectPage] = useState(1);
     const itemsPerPage = 2;
 
@@ -23,6 +55,7 @@ export default function Index() {
     };
 
     // State for paginating music
+    const [tunes, setTunes] = useState([]);
     const [currentMusicPage, setCurrentMusicPage] = useState(1);
     const itemsPerPageMusic = 6; // show 6 tunes per page
 
@@ -46,13 +79,13 @@ export default function Index() {
                             <div className="absolute inset-px  bg-white "></div>
                             <div className="relative flex flex-col h-full overflow-hidden">
                                 <div className="px-8 pt-6 pb-3 sm:px-10 sm:pt-8 sm:pb-0">
-                                    <a href={"#/projects/" + item.link} className="text-blue-500"><p className="mt-2 text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
+                                    <a href={`#/projects/${item.slug}`} className="text-blue-500"><p className="mt-2 text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
                                     <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                                         {item.description}
                                     </p>
                                 </div>
                                 <div className="@container relative flex-grow w-full max-lg:mx-auto max-lg:max-w-sm flex items-center justify-center mb-10 pt-6 p-10">
-                                    <img className="w-auto" src={item.image} alt="Ideas" />
+                                    <img className="w-auto" src={`/images/${item.front_image}`} alt="Ideas" />
                                 </div>
                             </div>
                             <div className="pointer-events-none absolute inset-px shadow-sm outline rounded-xl outline-black/5 "></div>
