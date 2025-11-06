@@ -81,6 +81,14 @@ app.post('/projects/:slug/comments', (req, res) => {
         if (err) return res.status(500).json({ error: err.message });
         if (!project) return res.status(404).json({ error: 'Project not found' });
 
+        if (name.length > 100) {
+            return res.status(400).json({ error: 'Name is too long' });
+        }
+
+        if (content.length > 500) {
+            return res.status(400).json({ error: 'Content is too long' });
+        }
+
         // 2️⃣ Insert the comment using the project ID
         db.run(
             'INSERT INTO comments (project_id, name, content) VALUES (?, ?, ?)',
