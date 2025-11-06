@@ -58,8 +58,8 @@ export default function Project({ project }) {
                         {/* Image 1 */}
                         {project.image1 ? (
                             <img
-                                src=""
-                                alt="Two each of gray, white, and black shirts laying flat."
+                                src={`/images/${project.image1}`}
+                                alt="Project image 1"
                                 className="row-span-2 aspect-3/4 size-full rounded-lg object-cover max-lg:hidden"
                             />
                         ) : (
@@ -70,7 +70,7 @@ export default function Project({ project }) {
                         {project.image2 ? (
                             <img
                                 src={`/images/${project.image2}`}
-                                alt="Model wearing plain black basic tee."
+                                alt="Project image 2"
                                 className="col-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden"
                             />
                         ) : (
@@ -81,7 +81,7 @@ export default function Project({ project }) {
                         {project.image3 ? (
                             <img
                                 src={`/images/${project.image3}`}
-                                alt="Model wearing plain gray basic tee."
+                                alt="Project image 3"
                                 className="col-start-2 row-start-2 aspect-3/2 size-full rounded-lg object-cover max-lg:hidden"
                             />
                         ) : (
@@ -89,10 +89,10 @@ export default function Project({ project }) {
                         )}
 
                         {/* Image 4 */}
-                        {false ? (
+                        {project.image4 ? (
                             <img
-                                src=""
-                                alt="Model wearing plain white basic tee."
+                                src={`/images/${project.image4}`}
+                                alt="Project image 4"
                                 className="row-span-2 aspect-4/5 size-full object-cover sm:rounded-lg lg:aspect-3/4"
                             />
                         ) : (
