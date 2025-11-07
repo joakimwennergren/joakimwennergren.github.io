@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { loadCaptchaEnginge } from 'react-simple-captcha';
 import { formatDistance } from "date-fns";
-import { utcToZonedTime } from 'date-fns-tz';
+import { formatInTimeZone } from 'date-fns-tz'
+
 import { sv } from "date-fns/locale";
 import CommentForm from "./comment-form";
 import ResponsivePagination from 'react-responsive-pagination';
@@ -79,7 +80,7 @@ export default function tune({ tune }) {
                                             <li key={index} className="p-3 bg-gray-100 rounded-lg">
                                                 <p className="font-semibold">{comment.name}</p>
                                                 <p className="text-gray-800">{comment.content}</p>
-                                                <span className="text-sm text-gray-500">{formatDistance(utcToZonedTime(new Date(comment.date_created), 'Europe/Stockholm'), new Date(), { locale: sv })} sedan</span>
+                                                <span className="text-sm text-gray-500">{formatDistance(formatInTimeZone(new Date(comment.date_created), 'Europe/Stockholm', 'yyyy-MM-dd HH:mm:ss zzz'), new Date(), { locale: sv })} sedan</span>
                                             </li>
                                         )) : (
                                             <li className="p-3 bg-gray-100 rounded-lg">
