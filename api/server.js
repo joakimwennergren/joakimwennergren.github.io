@@ -147,7 +147,6 @@ app.get('/music/:slug', (req, res) => {
     );
 });
 
-
 // Add comment to music (using slug)
 app.post('/music/:slug/comments', (req, res) => {
     const { slug } = req.params;
