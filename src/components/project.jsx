@@ -123,7 +123,7 @@ export default function Project({ project }) {
                                             <li key={index} className="p-3 bg-gray-100 rounded-lg">
                                                 <p className="font-semibold">{comment.name}</p>
                                                 <p className="text-gray-800">{comment.content}</p>
-                                                <span className="text-sm text-gray-500">{formatDistance(new Date(comment.date_created), new Date(), { locale: sv })} sedan</span>
+                                                <span className="text-sm text-gray-500">{add(formatDistance(new Date(comment.date_created), new Date(), { locale: sv }), 1)} sedan</span>
                                             </li>
                                         )) : (
                                             <li className="p-3 bg-gray-100 rounded-lg">
