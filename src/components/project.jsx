@@ -12,13 +12,17 @@ export default function Project({ project }) {
     // State for paginating projects
     const [comments, setComments] = useState([]);
     const [currentProjectPage, setCurrentProjectPage] = useState(1);
-    const itemsPerPage = 2;
+    const itemsPerPage = 4;
 
     const totalPages = Math.ceil(comments.length / itemsPerPage);
     const currentItems = comments.slice(
         (currentProjectPage - 1) * itemsPerPage,
         currentProjectPage * itemsPerPage
     );
+
+    const SetCurrentCommentPage = (value) => {
+        setCurrentProjectPage(value);
+    };
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -115,7 +119,7 @@ export default function Project({ project }) {
                                 <div className="mt-6">
                                     <h3 className="text-md font-semibold mb-2">Kommentarer</h3>
                                     <ul className="space-y-4">
-                                        {comments && comments.length > 0 ? comments.map((comment, index) => (
+                                        {comments && currentItems.length > 0 ? currentItems.map((comment, index) => (
                                             <li key={index} className="p-3 bg-gray-100 rounded-lg">
                                                 <p className="font-semibold">{comment.name}</p>
                                                 <p className="text-gray-800">{comment.content}</p>
@@ -131,10 +135,9 @@ export default function Project({ project }) {
                                         <ResponsivePagination
                                             current={currentProjectPage}
                                             total={totalPages}
-                                            onPageChange={setCurrentProjectPage}
+                                            onPageChange={SetCurrentCommentPage}
                                         />
                                     </div>
-
                                 </div>
                             </section>
                         </div>

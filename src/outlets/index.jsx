@@ -37,6 +37,7 @@ export default function Index() {
         };
 
         loadData();
+        console.log("loadnig data..");
     }, []);
 
     // State for paginating projects
@@ -50,7 +51,7 @@ export default function Index() {
         currentProjectPage * itemsPerPage
     );
 
-    const SetCurrentProjectPage = (event, value) => {
+    const SetCurrentProjectPage = (value) => {
         setCurrentProjectPage(value);
     };
 
@@ -65,8 +66,9 @@ export default function Index() {
         currentMusicPage * itemsPerPageMusic
     );
 
-    const handleMusicChange = (event, value) => {
+    const handleMusicChange = (value) => {
         setCurrentMusicPage(value);
+        console.log("chaing page = ", value)
     };
 
     const ProjectsAndMusic = () => {
@@ -95,7 +97,7 @@ export default function Index() {
                         <ResponsivePagination
                             current={currentProjectPage}
                             total={totalPages}
-                            onPageChange={setCurrentProjectPage}
+                            onPageChange={SetCurrentProjectPage}
                         />
                     </div>
                 </>
@@ -105,7 +107,7 @@ export default function Index() {
         const MusicContents = () => {
             return (
                 <>
-                    {tunes.map((item, index) => (
+                    {currentMusicItems.map((item, index) => (
                         <div className="relative flex flex-col  xl:max-w-xl  md:max-w-2xl md:mx-auto mb-4" key={`tune-${index}`}>
                             <div className="absolute inset-px  bg-white "></div>
                             <div className="relative flex flex-col h-full overflow-hidden">
@@ -119,9 +121,9 @@ export default function Index() {
                     ))}
                     <div className="mx-auto md:max-w-2xl mb-4">
                         <ResponsivePagination
-                            current={currentProjectPage}
-                            total={totalPages}
-                            onPageChange={setCurrentProjectPage}
+                            current={currentMusicPage}
+                            total={totalMusicPages}
+                            onPageChange={handleMusicChange}
                         />
                     </div>
                 </>
