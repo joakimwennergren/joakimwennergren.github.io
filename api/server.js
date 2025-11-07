@@ -48,27 +48,6 @@ app.get('/projects/:slug', (req, res) => {
     );
 });
 
-// Add a new project
-app.post('/projects', (req, res) => {
-    const { title, description, body, front_image, image1, image2, image3, image4, slug } = req.body;
-
-    if (!title || !description || !body || !front_image || !image1 || !image2 || !image3 || !image4 || !slug) {
-        return res.status(400).json({ error: 'All fields are required' });
-    }
-
-    db.run(
-        `INSERT INTO projects 
-         (title, description, body, front_image, image1, image2, image3, image4, slug)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [title, description, body, front_image, image1, image2, image3, image4, slug],
-        function (err) {
-            if (err) return res.status(500).json({ error: err.message });
-            res.status(201).json({ id: this.lastID, title, description, body, front_image, image1, image2, image3, image4, slug });
-        }
-    );
-});
-
-// Add comment to project
 // Add comment to project (using slug)
 app.post('/projects/:slug/comments', (req, res) => {
     const { slug } = req.params;
@@ -140,59 +119,71 @@ app.get('/music', (req, res) => {
     });
 });
 
-// Get a single music item with comments
-app.get('/music/:id', (req, res) => {
-    const { id } = req.params;
+// Get a single music item by slug with comments
+app.get('/music/:slug', (req, res) => {
+    const { slug } = req.params;
 
     db.get(
-        `SELECT m.*, IFNULL(AVG(r.rating),0) as average_rating
+        `SELECT m.*, IFNULL(AVG(r.rating), 0) as average_rating
          FROM music m
          LEFT JOIN music_ratings r ON m.id = r.music_id
-         WHERE m.id = ?
+         WHERE m.slug = ?
          GROUP BY m.id`,
-        [id],
+        [slug],
         (err, music) => {
             if (err) return res.status(500).json({ error: err.message });
             if (!music) return res.status(404).json({ error: 'Music not found' });
 
-            db.all('SELECT * FROM music_comments WHERE music_id = ?', [id], (err, comments) => {
+            db.all(
+                'SELECT * FROM music_comments WHERE music_id = ?',
+                [music.id],
+                (err, comments) => {
+                    if (err) return res.status(500).json({ error: err.message });
+                    music.comments = comments;
+                    res.json(music);
+                }
+            );
+        }
+    );
+});
+
+
+// Add comment to music (using slug)
+app.post('/music/:slug/comments', (req, res) => {
+    const { slug } = req.params;
+    const { content, name } = req.body;
+
+    if (!content || !name) return res.status(400).json({ error: 'Content and name are required' });
+
+    // Find the music item by slug
+    db.get('SELECT id FROM music WHERE slug = ?', [slug], (err, music) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!music) return res.status(404).json({ error: 'Music not found' });
+
+        if (name.length > 100) {
+            return res.status(400).json({ error: 'Name is too long' });
+        }
+
+        if (content.length > 500) {
+            return res.status(400).json({ error: 'Content is too long' });
+        }
+
+        // Insert the comment using the music ID
+        db.run(
+            'INSERT INTO music_comments (music_id, name, content) VALUES (?, ?, ?)',
+            [music.id, name, content],
+            function (err) {
                 if (err) return res.status(500).json({ error: err.message });
-                music.comments = comments;
-                res.json(music);
-            });
-        }
-    );
-});
-
-// Add new music
-app.post('/music', (req, res) => {
-    const { title, description, body, image } = req.body;
-    if (!title || !description || !body || !image) return res.status(400).json({ error: 'All fields are required' });
-
-    db.run(
-        'INSERT INTO music (title, description, body, image) VALUES (?, ?, ?, ?)',
-        [title, description, body, image],
-        function (err) {
-            if (err) return res.status(500).json({ error: err.message });
-            res.status(201).json({ id: this.lastID, title, description, body, image });
-        }
-    );
-});
-
-// Add comment to music
-app.post('/music/:id/comments', (req, res) => {
-    const { id } = req.params;
-    const { content } = req.body;
-    if (!content) return res.status(400).json({ error: 'Content is required' });
-
-    db.run(
-        'INSERT INTO music_comments (music_id, content) VALUES (?, ?)',
-        [id, content],
-        function (err) {
-            if (err) return res.status(500).json({ error: err.message });
-            res.status(201).json({ id: this.lastID, music_id: id, content });
-        }
-    );
+                res.status(201).json({
+                    id: this.lastID,
+                    music_id: music.id,
+                    slug,
+                    name,
+                    content,
+                });
+            }
+        );
+    });
 });
 
 // Rate music

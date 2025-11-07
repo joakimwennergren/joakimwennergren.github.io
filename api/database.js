@@ -30,7 +30,7 @@ db.serialize(() => {
             title TEXT NOT NULL,
             description TEXT NOT NULL,
             body TEXT NOT NULL,
-            image TEXT NOT NULL,
+            song TEXT NOT NULL,
             date_created DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     `);

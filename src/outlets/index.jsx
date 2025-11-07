@@ -105,27 +105,25 @@ export default function Index() {
         const MusicContents = () => {
             return (
                 <>
-                    {currentMusicItems.map((item, index) => (
+                    {tunes.map((item, index) => (
                         <div className="relative flex flex-col  xl:max-w-xl  md:max-w-2xl md:mx-auto mb-4" key={`tune-${index}`}>
                             <div className="absolute inset-px  bg-white "></div>
                             <div className="relative flex flex-col h-full overflow-hidden">
-                                <div className="px-5 pt-5 pb-5">
-                                    <a href={"#/tunes/" + item.title} className="text-blue-500"><p className="text-md font-medium tracking-tight">{item.title}</p></a>
+                                <div className="px-4 sm:px-4 sm:pt-4 sm:pb-0 mb-4">
+                                    <a href={`#/tunes/${item.slug}`} className="text-blue-500"><p className="text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
                                 </div>
-                                <AudioPlayer showJumpControls={false} src={"https://joakimwennergren.se/" + item.title.replace(/\s+/g, '').toLowerCase() + ".wav"} />
+                                <AudioPlayer showJumpControls={false} src={`/music/${item.song}`} />
                             </div>
                             <div className="pointer-events-none absolute inset-px shadow-sm outline rounded-xl outline-black/5 "></div>
                         </div>
-                    ))
-                    }
+                    ))}
                     <div className="mx-auto md:max-w-2xl mb-4">
                         <ResponsivePagination
-                            current={currentMusicPage}
-                            total={totalMusicPages}
-                            onPageChange={setCurrentMusicPage}
+                            current={currentProjectPage}
+                            total={totalPages}
+                            onPageChange={setCurrentProjectPage}
                         />
                     </div>
-
                 </>
             )
         }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { loadCaptchaEnginge, validateCaptcha, LoadCanvasTemplateNoReload } from "react-simple-captcha";
 import API_BASE from "../data/api";
 
-const CommentForm = ({ slug }) => {
+const CommentForm = ({ slug, tuneOrProject }) => {
     const [name, setName] = useState("");
     const [comment, setComment] = useState("");
     const [captcha, setCaptcha] = useState("");
@@ -10,7 +10,7 @@ const CommentForm = ({ slug }) => {
 
     async function postProjectComment(projectSlug, name, content) {
         try {
-            const res = await fetch(`${API_BASE}/projects/${projectSlug}/comments`, {
+            const res = await fetch(`${API_BASE}/${tuneOrProject ? "music" : "projects"}/${projectSlug}/comments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, content })
