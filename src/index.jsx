@@ -1,5 +1,5 @@
 import {
-  createHashRouter,
+  createBrowserRouter,
   RouterProvider,
 } from "react-router";
 import ReactDOM from 'react-dom/client';
@@ -10,7 +10,7 @@ import Tunes from './outlets/tunes';
 
 import './App.css';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     // no path on this parent route, just the component
     Component: Layout,

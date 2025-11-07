@@ -81,7 +81,7 @@ export default function Index() {
                             <div className="absolute inset-px  bg-white "></div>
                             <div className="relative flex flex-col h-full overflow-hidden">
                                 <div className="px-8 pt-6 pb-3 sm:px-10 sm:pt-8 sm:pb-0">
-                                    <a href={`#/projects/${item.slug}`} className="text-blue-500"><p className="mt-2 text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
+                                    <a href={`/projects/${item.slug}`} className="text-blue-500"><p className="mt-2 text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
                                     <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
                                         {item.description}
                                     </p>
@@ -112,7 +112,7 @@ export default function Index() {
                             <div className="absolute inset-px  bg-white "></div>
                             <div className="relative flex flex-col h-full overflow-hidden">
                                 <div className="px-4 sm:px-4 sm:pt-4 sm:pb-0 mb-4">
-                                    <a href={`#/tunes/${item.slug}`} className="text-blue-500"><p className="text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
+                                    <a href={`/tunes/${item.slug}`} className="text-blue-500"><p className="text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
                                 </div>
                                 <AudioPlayer showJumpControls={false} src={`/music/${item.song}`} />
                             </div>
