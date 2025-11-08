@@ -18,7 +18,7 @@ db.serialize(() => {
             image2 TEXT,
             image3 TEXT,
             image4 TEXT,
-            date_created DATE DEFAULT (datetime('now','localtime'))
+            date_created DATETIME DEFAULT (datetime('now','localtime'))
         )
     `);
 
@@ -31,7 +31,7 @@ db.serialize(() => {
             description TEXT NOT NULL,
             body TEXT NOT NULL,
             song TEXT NOT NULL,
-            date_created DATE DEFAULT (datetime('now','localtime'))
+            date_created DATETIME DEFAULT (datetime('now','localtime'))
         )
     `);
 
@@ -52,7 +52,7 @@ db.serialize(() => {
             project_id INTEGER NOT NULL,
             name TEXT,
             content TEXT NOT NULL,
-            date_created DATE DEFAULT (datetime('now','localtime')),
+            date_created DATETIME DEFAULT (datetime('now','localtime')),
             FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
         )
     `);
@@ -74,7 +74,7 @@ db.serialize(() => {
             music_id INTEGER NOT NULL,
             name TEXT,
             content TEXT NOT NULL,
-            date_created DATE DEFAULT (datetime('now','localtime')),
+            date_created DATETIME DEFAULT (datetime('now','localtime')),
             FOREIGN KEY (music_id) REFERENCES music(id) ON DELETE CASCADE
         )
     `);
