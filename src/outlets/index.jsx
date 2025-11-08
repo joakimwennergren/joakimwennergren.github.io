@@ -111,7 +111,7 @@ export default function Index() {
                         <div className="relative flex flex-col  xl:max-w-xl  md:max-w-2xl md:mx-auto mb-4" key={`tune-${index}`}>
                             <div className="absolute inset-px  bg-white "></div>
                             <div className="relative flex flex-col h-full overflow-hidden">
-                                <div className="px-4 sm:px-4 sm:pt-4 sm:pb-0 mb-4">
+                                <div className="px-4 sm:px-4 sm:pt-4 sm:pb-0 mb-4 pt-2">
                                     <a href={`/tunes/${item.slug}`} className="text-blue-500"><p className="text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
                                 </div>
                                 <AudioPlayer showJumpControls={false} src={`/music/${item.song}`} />
