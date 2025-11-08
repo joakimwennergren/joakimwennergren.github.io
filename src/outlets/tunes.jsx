@@ -29,7 +29,7 @@ export default function Tunes() {
 
     return (
         <>
-            {tune ? <Tune tune={tune} /> : <p>Låten finns inte..</p>}
+            {tune ? <Tune tune={tune} /> : <p>Laddar låt..</p>}
         </>
     );
 }

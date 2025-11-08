@@ -29,7 +29,7 @@ export default function Projects() {
 
     return (
         <>
-            {project ? <Project project={project} /> : <p>Projektet finns inte..</p>}
+            {project ? <Project project={project} /> : <p>Laddar projekt..</p>}
         </>
     );
 }
