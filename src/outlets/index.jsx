@@ -112,7 +112,7 @@ export default function Index() {
                             <div className="absolute inset-px  bg-white "></div>
                             <div className="relative flex flex-col h-full overflow-hidden">
                                 <div className="px-4 sm:px-4 sm:pt-4 sm:pb-0 mb-4 pt-2">
-                                    <a href={`/tunes/${item.slug}`} className="text-blue-500"><p className="text-lg font-medium tracking-tight  max-lg:text-center">{item.title}</p></a>
+                                    <a href={`/tunes/${item.slug}`} className="text-blue-500"><p className="text-lg font-medium tracking-tight">{item.title}</p></a>
                                 </div>
                                 <AudioPlayer showJumpControls={false} src={`/music/${item.song}`} />
                             </div>
