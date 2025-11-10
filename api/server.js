@@ -87,21 +87,61 @@ app.post('/projects/:slug/comments', (req, res) => {
     });
 });
 
-// Rate a project
-app.post('/projects/:id/rate', (req, res) => {
-    const { id } = req.params;
+
+function getClientIp(req) {
+    let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+    ip = ip.split(',')[0].trim(); // take first if multiple
+    // optional: strip IPv6 prefix ::ffff:
+    if (ip.startsWith('::ffff:')) ip = ip.substring(7);
+    return ip;
+}
+
+// Rate a project by slug (one rating per IP)
+app.post('/projects/:slug/rate', (req, res) => {
+    const { slug } = req.params;
     const { rating } = req.body;
 
-    if (!rating || rating < 1 || rating > 5) return res.status(400).json({ error: 'Rating must be 1-5' });
+    if (!rating || rating < 1 || rating > 5) {
+        return res.status(400).json({ error: 'Rating must be 1–5' });
+    }
 
-    db.run(
-        'INSERT INTO ratings (project_id, rating) VALUES (?, ?)',
-        [id, rating],
-        function (err) {
-            if (err) return res.status(500).json({ error: err.message });
-            res.status(201).json({ id: this.lastID, project_id: id, rating });
-        }
-    );
+    const ip = getClientIp(req);
+
+    // Step 1: Find project by slug
+    db.get('SELECT id FROM projects WHERE slug = ?', [slug], (err, project) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!project) return res.status(404).json({ error: 'Projektet hittades ej' });
+
+        const projectId = project.id;
+
+        // Step 2: Check if this IP already rated this project
+        db.get(
+            'SELECT id FROM ratings WHERE project_id = ? AND ip_adress = ?',
+            [projectId, ip],
+            (err, existing) => {
+                if (err) return res.status(500).json({ error: err.message });
+                if (existing) {
+                    // IP has already rated this project
+                    return res.status(400).json({ error: 'Du har redan betygsatt det här projektet' });
+                }
+
+                // Step 3: Insert rating
+                db.run(
+                    'INSERT INTO ratings (project_id, rating, ip_adress) VALUES (?, ?, ?)',
+                    [projectId, rating, ip],
+                    function (err) {
+                        if (err) return res.status(500).json({ error: err.message });
+                        res.status(201).json({
+                            id: this.lastID,
+                            project_slug: slug,
+                            project_id: projectId,
+                            rating
+                        });
+                    }
+                );
+            }
+        );
+    });
 });
 
 // ------------------- MUSIC -------------------
@@ -186,20 +226,57 @@ app.post('/music/:slug/comments', (req, res) => {
     });
 });
 
-// Rate music
-app.post('/music/:id/rate', (req, res) => {
-    const { id } = req.params;
+// Rate a song by slug (one rating per IP)
+app.post('/music/:slug/rate', (req, res) => {
+    const { slug } = req.params;
     const { rating } = req.body;
-    if (!rating || rating < 1 || rating > 5) return res.status(400).json({ error: 'Rating must be 1-5' });
 
-    db.run(
-        'INSERT INTO music_ratings (music_id, rating) VALUES (?, ?)',
-        [id, rating],
-        function (err) {
-            if (err) return res.status(500).json({ error: err.message });
-            res.status(201).json({ id: this.lastID, music_id: id, rating });
-        }
-    );
+    if (!rating || rating < 1 || rating > 5) {
+        return res.status(400).json({ error: 'Betyget måste vara 1-5' });
+    }
+
+    const ip = getClientIp(req);
+
+    console.log(ip);
+
+    // Step 1: Find project by slug
+    db.get('SELECT id FROM music WHERE slug = ?', [slug], (err, music) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (!music) return res.status(404).json({ error: 'Låten hittades ej' });
+
+        const musicId = music.id;
+
+        console.log(musicId);
+
+        // Step 2: Check if this IP already rated this project
+        db.get(
+            'SELECT id FROM music_ratings WHERE music_id = ? AND ip_adress = ?',
+            [musicId, ip],
+            (err, existing) => {
+                console.log('Existing rating:', existing);
+                if (err) return res.status(500).json({ error: err.message });
+                if (existing) {
+                    // IP has already rated this project
+                    return res.status(400).json({ error: 'Du har redan betygsatt den här låten' });
+                }
+
+                // Step 3: Insert rating
+                db.run(
+                    'INSERT INTO music_ratings (music_id, rating, ip_adress) VALUES (?, ?, ?)',
+                    [musicId, rating, ip],
+                    function (err) {
+                        if (err) return res.status(500).json({ error: err.message });
+                        res.status(201).json({
+                            id: this.lastID,
+                            music_slug: slug,
+                            music_id: musicId,
+                            rating
+                        });
+                    }
+                );
+            }
+        );
+    });
 });
 
 app.listen(PORT, () => {

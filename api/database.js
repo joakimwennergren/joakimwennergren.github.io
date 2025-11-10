@@ -18,7 +18,8 @@ db.serialize(() => {
             image2 TEXT,
             image3 TEXT,
             image4 TEXT,
-            date_created DATETIME DEFAULT (datetime('now','localtime'))
+            date_created DATETIME DEFAULT (datetime('now','localtime')),
+            sort_order INTEGER
         )
     `);
 
@@ -41,6 +42,7 @@ db.serialize(() => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             project_id INTEGER NOT NULL,
             rating INTEGER NOT NULL,
+            ip_adress TEXT NOT NULL,
             FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
         )
     `);
@@ -63,6 +65,7 @@ db.serialize(() => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             music_id INTEGER NOT NULL,
             rating INTEGER NOT NULL,
+            ip_adress TEXT NOT NULL,
             FOREIGN KEY (music_id) REFERENCES music(id) ON DELETE CASCADE
         )
     `);

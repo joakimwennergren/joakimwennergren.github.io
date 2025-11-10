@@ -18,9 +18,9 @@ export default function Tunes() {
     }
 
     useEffect(() => {
-        console.log("Fetching tune with slug:", tuneSlug);
         const loadData = async () => {
             const fetchedtune = await fetchtune();
+            console.log(fetchedtune)
             setTune(fetchedtune);
         };
 

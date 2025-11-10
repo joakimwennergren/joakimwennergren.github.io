@@ -2,15 +2,50 @@ import { useEffect, useState } from "react";
 import { loadCaptchaEnginge } from 'react-simple-captcha';
 import { formatDistance } from "date-fns";
 import { formatInTimeZone } from 'date-fns-tz'
-
+import { Rating, ThinStar } from '@smastrom/react-rating'
 import { sv } from "date-fns/locale";
+import API_BASE from "../data/api";
 import CommentForm from "./comment-form";
 import ResponsivePagination from 'react-responsive-pagination';
 import 'react-responsive-pagination/themes/minimal-light-dark.css';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import '@smastrom/react-rating/style.css';
+
 
 export default function tune({ tune }) {
+
+    const [rating, setRating] = useState(0);
+    const [loading, setLoading] = useState(false)
+    const [message, setMessage] = useState('')
+
+    const handleRate = async (newValue) => {
+        console.log(newValue)
+        setRating(newValue)
+        setLoading(true)
+        setMessage('')
+
+        try {
+            const response = await fetch(`${API_BASE}/music/${tune.slug}/rate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ rating: newValue }),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Misslyckades med att betygsätta')
+            }
+
+            setMessage('✅ Tack för din input!')
+        } catch (err) {
+            console.error(err)
+            setMessage('❌ ' + err.message)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     // State for paginating tunes
     const [comments, setComments] = useState([]);
@@ -31,6 +66,7 @@ export default function tune({ tune }) {
         if (tune.error == undefined) {
             loadCaptchaEnginge(6);
             setComments(tune.comments || []);
+            setRating(Math.ceil(tune.average_rating));
         }
     }, [tune]);
 
@@ -74,6 +110,18 @@ export default function tune({ tune }) {
                                     <AudioPlayer showJumpControls={false} className="mt-4" src={`/music/${tune.song}`} />
                                 </div>
                                 <div className="mt-4 lg:mt-0 lg:row-span-3 mx-4 mb-4">
+                                    <div className="max-w-2xl mx-auto  p-4 bg-white rounded-lg shadow-md mb-4">
+                                        <div>
+                                            <h2 className="text-lg font-semibold mb-4">Betygsätt låten</h2>
+                                            <Rating
+                                                style={{ maxWidth: 150 }}
+                                                value={rating}
+                                                onChange={handleRate}
+                                                isDisabled={loading}
+                                            />
+                                            <div className="mt-2">{message && <div style={{ marginTop: 8, fontSize: 14 }}>{message}</div>}</div>
+                                        </div>
+                                    </div>
                                     <section className="max-w-2xl mx-auto  p-4 bg-white rounded-lg shadow-md">
                                         <h2 className="text-lg font-semibold mb-4">Kommentera låten</h2>
                                         <CommentForm slug={tune.slug} tuneOrProject={true} />
