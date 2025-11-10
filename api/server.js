@@ -16,7 +16,7 @@ app.get('/projects', (req, res) => {
         FROM projects p
         LEFT JOIN ratings r ON p.id = r.project_id
         GROUP BY p.id
-        ORDER BY p.sort_order
+        ORDER BY p.sort_order DESC
     `;
     db.all(sql, [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
