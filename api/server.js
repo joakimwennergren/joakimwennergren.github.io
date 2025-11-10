@@ -9,13 +9,14 @@ app.use(express.json()); // Important for parsing JSON
 
 // ------------------- PROJECTS -------------------
 
-// Get all projects with average rating
+// Get all projects with average rating, ordered by sort_order
 app.get('/projects', (req, res) => {
     const sql = `
-        SELECT p.*, IFNULL(AVG(r.rating),0) as average_rating
+        SELECT p.*, IFNULL(AVG(r.rating), 0) AS average_rating
         FROM projects p
         LEFT JOIN ratings r ON p.id = r.project_id
         GROUP BY p.id
+        ORDER BY p.sort_order
     `;
     db.all(sql, [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
